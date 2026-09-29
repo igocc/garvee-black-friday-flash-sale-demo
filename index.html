@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="GARVEE Black Friday Vote & Drop interactive prototype." />
+    <meta name="theme-color" content="#10100f" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>GARVEE Black Friday Vote & Drop</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="prototype-banner" role="note">
+      <span>INTERACTIVE PROTOTYPE</span>
+      <p>Voting, account, eligibility, inventory, and checkout are simulated in this browser.</p>
+      <button type="button" data-action="open-boundary">What would Shopify power?</button>
+    </div>
+
+    <header class="site-header">
+      <a class="wordmark" href="#top" aria-label="GARVEE home">GARVEE</a>
+      <nav aria-label="Primary navigation">
+        <a href="#live">Live drop</a>
+        <a href="#vote">Vote</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#how">How it works</a>
+      </nav>
+      <button class="account-pill" type="button" data-action="login">
+        <span class="account-dot" aria-hidden="true"></span>
+        <span data-account-label>Sign in</span>
+      </button>
+    </header>
+
+    <main id="main">
+      <div id="app" aria-live="polite"></div>
+    </main>
+
+    <footer class="site-footer">
+      <div>
+        <a class="wordmark" href="#top">GARVEE</a>
+        <p>Built to test a Black Friday participation flow. Not a production storefront.</p>
+      </div>
+      <div class="footer-links">
+        <button type="button" data-action="open-boundary">Shopify implementation notes</button>
+        <a href="https://www.garvee.com" target="_blank" rel="noreferrer">Visit GARVEE</a>
+      </div>
+    </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <dialog class="modal" id="loginModal" aria-labelledby="loginTitle">
+      <button class="modal-close" type="button" data-action="close-modal" aria-label="Close">×</button>
+      <p class="eyebrow">Shopify customer account · simulated</p>
+      <h2 id="loginTitle">Sign in to unlock the drop</h2>
+      <p>In production, this step would return the customer to the campaign through Shopify Customer Accounts.</p>
+      <label class="field">
+        <span>Email</span>
+        <input id="loginEmail" type="email" value="demo@garvee.com" autocomplete="email" />
+      </label>
+      <button class="button button-primary button-full" type="button" data-action="complete-login">Continue as demo customer</button>
+    </dialog>
+
+    <dialog class="modal boundary-modal" id="boundaryModal" aria-labelledby="boundaryTitle">
+      <button class="modal-close" type="button" data-action="close-modal" aria-label="Close">×</button>
+      <p class="eyebrow">Prototype boundary</p>
+      <h2 id="boundaryTitle">What changes in a real Shopify build</h2>
+      <div class="boundary-grid">
+        <section>
+          <span class="boundary-tag is-demo">This demo</span>
+          <ul>
+            <li>Browser Cookie limits one casual vote</li>
+            <li>Buttons simulate sign-in, booking, and share</li>
+            <li>Inventory and five-minute hold are visual states</li>
+            <li>Demo controls preview every campaign phase</li>
+          </ul>
+        </section>
+        <section>
+          <span class="boundary-tag is-live">Real Shopify</span>
+          <ul>
+            <li>App Proxy + database owns votes and eligibility</li>
+            <li>Scheduler opens one slot every two hours</li>
+            <li>Shopify inventory arbitrates the final two units</li>
+            <li>Checkout Validation enforces eligibility where available</li>
+          </ul>
+        </section>
+      </div>
+      <p class="modal-note">A normal Shopify cart does not reserve inventory for five minutes. The hold shown here is a product-flow concept that needs a separate production design.</p>
+      <a class="button button-secondary button-full" href="./docs/shopify-implementation-notes.md" target="_blank">Read the verified implementation notes</a>
+    </dialog>
+
+    <aside class="demo-console" aria-label="Prototype controls">
+      <button class="console-toggle" type="button" data-action="toggle-console" aria-expanded="false">
+        <span>Demo controls</span><strong>＋</strong>
+      </button>
+      <div class="console-panel" hidden>
+        <p>Preview campaign state</p>
+        <div class="phase-buttons" role="group" aria-label="Campaign phase">
+          <button type="button" data-phase="voting">Voting</button>
+          <button type="button" data-phase="upcoming">Countdown</button>
+          <button type="button" data-phase="live">Live</button>
+          <button type="button" data-phase="soldout">Sold out</button>
+        </div>
+        <button class="console-reset" type="button" data-action="reset-demo">Reset browser demo</button>
+      </div>
+    </aside>
+
+    <nav class="variant-switcher" aria-label="Prototype variants">
+      <button type="button" data-action="previous-variant" aria-label="Previous variant">←</button>
+      <span data-variant-label>A · Drop Arena</span>
+      <button type="button" data-action="next-variant" aria-label="Next variant">→</button>
+    </nav>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
